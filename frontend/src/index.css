@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-light-bg text-text-main font-sans antialiased selection:bg-primary-500/20 overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-glass-gradient backdrop-blur-2xl border border-white/60 shadow-glass rounded-2xl relative overflow-hidden transition-all duration-300;
+  }
+  
+  .glass-panel::before {
+    content: '';
+    @apply absolute inset-0 rounded-2xl border border-white pointer-events-none opacity-50;
+  }
+
+  .glass-panel-hover:hover {
+    @apply bg-glass-gradient-hover border-white/90 shadow-glass-hover -translate-y-1;
+  }
+
+  .glass-input {
+    @apply bg-white/40 backdrop-blur-md border border-white/60 rounded-xl px-4 py-3 text-text-main placeholder-text-light focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all w-full shadow-sm;
+  }
+
+  .btn-cinematic {
+    @apply relative overflow-hidden bg-white/50 backdrop-blur-md border border-white/80 text-text-main font-medium px-8 py-3 rounded-xl hover:bg-white/80 hover:border-white transition-all duration-300 shadow-sm hover:shadow-md flex items-center justify-center gap-2;
+  }
+
+  .btn-cinematic-primary {
+    @apply relative overflow-hidden bg-gradient-to-r from-text-main to-gray-800 border-none text-white font-medium px-8 py-3 rounded-xl hover:from-black hover:to-gray-900 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-text-main/20 flex items-center justify-center gap-2;
+  }
+  
+  .text-glow-subtle {
+    text-shadow: 0 0 20px rgba(108, 99, 255, 0.2);
+  }
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 130, 120, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(140, 130, 120, 0.3);
+}
+
+/* Warm Noise overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+}

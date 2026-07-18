@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Collaboration Hub - Documentation</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 10px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #2c3e50;
+            margin-top: 40px;
+            border-bottom: 1px solid #eaeaea;
+            padding-bottom: 8px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        p {
+            margin-bottom: 16px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            color: #000;
+        }
+        .highlight {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        @media print {
+            body {
+                padding: 0;
+            }
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="no-print" style="background-color: #e8f4fd; border: 1px solid #b6d4fe; color: #084298; padding: 15px; border-radius: 6px; margin-bottom: 30px; text-align: center;">
+        <strong>Tip:</strong> Press <code>Ctrl + P</code> (or <code>Cmd + P</code> on Mac) and select <strong>"Save as PDF"</strong> to download this document!
+    </div>
+
+    <h1>Creator Collaboration Hub (Cosmo)</h1>
+
+    <h2>1. Purpose & Use of Project</h2>
+    <p><strong>Creator Collaboration Hub (Cosmo)</strong> is a cinematic, premium platform designed for elite designers, developers, and creative visionaries to connect, showcase their work, and build breakthrough projects together.</p>
+    
+    <p>Unlike traditional job boards that separate "employers" and "applicants," this platform uses a <strong>unified creator ecosystem</strong>. Every user is a "Creator" who can seamlessly switch contexts—posting their own visionary projects one minute, and applying to collaborate on someone else's project the next.</p>
+
+    <div class="highlight">
+        <strong>Key Objectives:</strong>
+        <ul>
+            <li><strong>Centralized Profiles:</strong> A single, robust creator profile showcasing skills, bio, downloadable PDF resumes, and a visual portfolio.</li>
+            <li><strong>Project Discovery:</strong> A dynamic ecosystem where users can explore active projects, filter by status, and discover trending skills.</li>
+            <li><strong>Streamlined Collaboration:</strong> Project owners can easily review applicants, accept/reject pitches, and notify collaborators in real-time.</li>
+            <li><strong>Premium User Experience:</strong> A glassmorphic, dark-themed UI enhanced by smooth Framer Motion micro-animations to provide a "cinematic" and highly engaging user experience.</li>
+        </ul>
+    </div>
+
+    <h2>2. Core Workflows</h2>
+
+    <h3>A. Authentication & Identity Flow</h3>
+    <ol>
+        <li><strong>Onboarding:</strong> A user registers with an email, username, and password.</li>
+        <li><strong>Stateless Auth:</strong> The Spring Boot backend authenticates the user and issues a JWT (JSON Web Token).</li>
+        <li><strong>Session:</strong> The React frontend stores the JWT and attaches it to the Authorization header for all subsequent protected API calls.</li>
+    </ol>
+
+    <h3>B. Creator Profile & Portfolio Workflow</h3>
+    <ol>
+        <li><strong>Profile Initialization:</strong> The user populates their profile (Bio, Links, Experience Level, Skills).</li>
+        <li><strong>Asset Uploads:</strong> The user can upload an Avatar or a PDF Resume. The backend securely pushes these files to <strong>Cloudinary</strong> and stores the resulting secure URLs in the MySQL database.</li>
+        <li><strong>Portfolio Management:</strong> Creators can upload case studies or past work (Thumbnails, Titles, Descriptions, Tech Stack) to their portfolio, which dynamically renders in a visually striking grid on their public profile.</li>
+    </ol>
+
+    <h3>C. Project Collaboration Lifecycle</h3>
+    <ol>
+        <li><strong>Project Creation (Owner):</strong> A creator posts a new collaboration project, defining required roles, project scope, and a banner image.</li>
+        <li><strong>Discovery & Application (Collaborator):</strong> Other creators browse the ecosystem, find the project, and submit an application containing a pitch message, portfolio link, and their desired role.</li>
+        <li><strong>Review & Action (Owner):</strong> The project owner receives the application in their Dashboard. They can review the applicant's profile/resume and choose to <strong>Accept</strong> or <strong>Reject</strong> the application.</li>
+        <li><strong>Notification:</strong> The applicant's dashboard instantly reflects the updated status of their application.</li>
+    </ol>
+
+    <h2>3. Technology Stack</h2>
+
+    <h3>Frontend (Client-Side)</h3>
+    <ul>
+        <li><strong>Framework:</strong> React (bootstrapped with Vite for ultra-fast HMR and optimized builds).</li>
+        <li><strong>Styling:</strong> Custom CSS combined with Tailwind utility patterns to achieve a high-end <strong>Glassmorphism</strong> aesthetic (frosted glass panels, ambient glows, blur effects).</li>
+        <li><strong>Motion & Animation:</strong> <code>framer-motion</code> is used extensively for cinematic page transitions, staggered list animations, and interactive hover states.</li>
+        <li><strong>Icons:</strong> <code>lucide-react</code> for clean, modern, and lightweight SVG icons.</li>
+        <li><strong>Routing & State:</strong> <code>react-router-dom</code> for SPA routing, and React Context (<code>AuthContext</code>) for global state management of the user's session.</li>
+    </ul>
+
+    <h3>Backend (Server-Side)</h3>
+    <ul>
+        <li><strong>Framework:</strong> Spring Boot 3 (Java 17).</li>
+        <li><strong>Security:</strong> Spring Security with custom stateless JWT Filters for robust endpoint protection.</li>
+        <li><strong>API Design:</strong> RESTful architecture, heavily utilizing DTOs (Data Transfer Objects) to decouple the database entities from the JSON payloads sent to the client.</li>
+        <li><strong>Documentation:</strong> <code>springdoc-openapi</code> (Swagger UI) for automated API contract generation.</li>
+    </ul>
+
+    <h3>Database & Storage</h3>
+    <ul>
+        <li><strong>Relational Database:</strong> MySQL 8.0.</li>
+        <li><strong>ORM:</strong> Spring Data JPA / Hibernate for object-relational mapping, automatic schema generation, and query building.</li>
+        <li><strong>Cloud Storage:</strong> <strong>Cloudinary</strong> SDK is integrated to handle all multipart file uploads (Profile Images, Project Banners, and PDF Resumes). It serves files securely via CDN, offloading storage overhead from the local server.</li>
+    </ul>
+
+</body>
+</html>
